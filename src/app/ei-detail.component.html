@@ -1,0 +1,19 @@
+<div *ngIf="ei">
+  <span>Фактическая дата отправки: </span>{{ei.DateTime}}<br>
+  <span>Желаемая дата доставки: </span>{{ei.PreferredDeliveryDate}}<br>
+  <span>Фактический вес: </span>{{ei.Weight}}<br>
+  <span>Количество мест: </span>{{ei.SeatsAmount}}<br>
+  <span>Номер интернет документа: </span>{{ei.IntDocNumber}}<br>
+  <span>Оценочная стоимость: </span>{{ei.Cost}}<br>
+  <span>Идентификатор города отправителя: </span>{{ei.CitySender}}<br>
+  <span>Идентификатор города получателя: </span>{{ei.CityRecipient}}<br>
+  <span>Идентификатор адреса отправителя: </span>{{ei.SenderAddress}}<br>
+  <span>Идентификатор адреса получателя: </span>{{ei.RecipientAddress}}<br>
+  <span>стоимость за доставку: </span>{{ei.CostOnSite}}<br>
+  <span>Плательщик доставки: </span>{{ei.PayerType}}<br>
+  <span>Тип оплаты: </span>{{ei.PaymentMethod}}<br>
+  <span>Обратная доставка: </span>{{ei.AfterpaymentOnGoodsCost}}<br>
+  <span>Номер упаковки: </span>{{ei.PackingNumber}}<br>
+  <button (click)="goBack()">Back</button>
+  <button (click)="del()">Delete</button>
+</div>

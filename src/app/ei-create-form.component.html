@@ -1,0 +1,145 @@
+<div class="container">
+    <h1>EI create Form</h1>
+    <form  #formDir="ngForm">
+      <div class="form-group">
+        <label for="PayerType">PayerType</label>
+          <select class="form-control"  id="payerType" required name="payerType">
+             <option *ngFor="let payer of payers | async ">{{payer.Description}}</option>
+         </select>
+      </div>
+
+      <div class="form-group">
+        <label for="PaymentMethod">PaymentMethod</label>
+        <select class="form-control"  id="paymentMethod" required name="paymentMethod">
+           <option *ngFor="let payment of payments | async ">{{payment.Description}}</option>
+         </select>
+      </div>
+
+      <div class="form-group">
+        <label for="DateTime">DateTime</label>
+        <input type="text" class="form-control" id="DateTime">
+      </div>
+
+      <div class="form-group">
+        <label for="CargoType">CargoType</label>
+        <select class="form-control"  id="CargoType" required name="CargoType">
+           <option *ngFor="let cargo of cargos | async ">{{cargo.Description}}</option>
+         </select>
+      </div>
+
+      <div class="form-group">
+        <label for="VolumeGeneral">VolumeGeneral</label>
+        <input type="text" class="form-control" id="VolumeGeneral">
+      </div>
+
+      <div class="form-group">
+        <label for="Weight">Weight</label>
+        <input type="text" class="form-control" id="Weight">
+      </div>
+
+      <div class="form-group">
+        <label for="ServiceType">ServiceType</label>
+        <select class="form-control"  id="serviceType" required name="serviceType">
+           <option *ngFor="let service of services | async ">{{service.Description}}</option>
+         </select>
+      </div>
+
+      <div class="form-group">
+        <label for="SeatsAmount">SeatsAmount</label>
+        <input type="text" class="form-control" id="SeatsAmount">
+      </div>
+
+      <div class="form-group">
+        <label for="Description">Description</label>
+        <input type="text" class="form-control" id="Description">
+      </div>
+
+      <div class="form-group">
+        <label for="Cost">Cost</label>
+        <input type="text" class="form-control" id="Cost">
+      </div>
+
+      <div class="form-group">
+        <div id="search-city">
+            <h4>CitySender search</h4>
+            <input #searchBoxCity id="search-box" (keyup)="search(searchBoxCity.value)" />
+
+            <div *ngFor="let city of cities | async" class="search-result2"
+            [class.selected]="city === selectedCity"
+            (click)="writeCity([city.MainDescription,city.Area,city.Ref])">
+            >
+               <span><strong>{{city.MainDescription}}</strong> <span> Область: {{city.Area}}</span></span>
+            </div>
+            <label for="city">CitySender</label>
+            <input type="text" class="form-control" id="city" value={{city}}>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="Sender">Sender</label>
+        <select class="form-control"  id="Sender" required name="Sender">
+           <option *ngFor="let sender of senders | async ">{{sender.Description}}</option>
+         </select>
+      </div>
+
+
+      <div class="form-group">
+        <div id="search-address">
+            <h4>Sender Address</h4>
+            <input #searchBoxAddress id="search-address" (keyup)="searchAddress(searchBoxAddress.value)" />
+
+            <div *ngFor="let address of addresses | async" class="search-resultAddress"
+            [class.selected]="address === selectedAddress"
+            (click)="writeAddress([address.Present,address.SettlementStreetRef])">
+            >
+               <span><strong>{{address.Present}}</strong> <span></span></span>
+            </div>
+            <label for="senderAddress">SenderStreet</label>
+            <input type="text" class="form-control" id="SenderAddress" value={{address}}>
+            <label for="senderStreetNum">SenderStreetNum</label>
+            <input type="text" class="form-control" id="SenderStreetNum">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="ContactSender">ContactSender</label>
+        <input type="text" class="form-control" id="ContactSender">
+      </div>
+
+      <div class="form-group">
+        <label for="SenderPhone">SenderPhone</label>
+        <input type="text" class="form-control" id="SenderPhone">
+      </div>
+
+      <div class="form-group">
+        <label for="CityRecipient">CityRecipient</label>
+        <input type="text" class="form-control" id="CityRecipient">
+      </div>
+
+      <div class="form-group">
+        <label for="Recipient">Recipient</label>
+        <input type="text" class="form-control" id="Recipient">
+      </div>
+
+      <div class="form-group">
+        <label for="RecipientAddress">RecipientAddress</label>
+        <input type="text" class="form-control" id="RecipientAddress">
+      </div>
+
+      <div class="form-group">
+        <label for="ContactRecipient">ContactRecipient</label>
+        <input type="text" class="form-control" id="ContactRecipient">
+      </div>
+
+      <div class="form-group">
+        <label for="RecipientsPhone">RecipientsPhone</label>
+        <input type="text" class="form-control" id="RecipientsPhone">
+      </div>
+
+
+      <button type="submit" class="btn btn-success">Send</button>
+
+    </form>
+
+    <pre>{{formDir.form.value | json}}</pre>
+</div>

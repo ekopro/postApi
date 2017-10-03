@@ -1,0 +1,281 @@
+<div class="container">
+    <h1>Создание Електронной накладной</h1>
+    <form (ngSubmit)="onSubmit()" #formDir="ngForm">
+      <div class="form-group">
+        <input type="string"  #apiKey/>
+        <button (click) = '
+        this.writeApiKey(apiKey.value);
+        senders = this.getSender();
+        recipients = this.getRecipient();'>
+        writeAPiKey</button>
+      </div>
+
+
+      <div class="form-group" >
+        <label for="PayerType">PayerType</label>
+        <select
+        [(ngModel)]="model.PayerType" name="PayerType"
+        #PayerType="ngModel"
+        class="form-control"  id="PayerType" required name="PayerType">
+          <option value="">Please select a option</option>
+          <option [ngValue] = 'payer.Ref' *ngFor="let payer of payers | async">{{payer.Description}}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="PaymentMethod">PaymentMethod</label>
+        <select
+        [(ngModel)]="model.PaymentMethod" name="PaymentMethod"
+        #PaymentMethod="ngModel"
+        class="form-control"  id="PaymentMethod" required name="PaymentMethod">
+           <option value="">Please select a option</option>
+           <option  [ngValue] = 'payment.Ref' *ngFor="let payment of payments | async ">{{payment.Description}}</option>
+         </select>
+      </div>
+
+      <div class="form-group">
+        <label for="DateTime">DateTime</label>
+        <input
+        [(ngModel)]="model.DateTime" name="DateTime"
+        #DateTime="ngModel"
+        type="text" class="form-control" id="DateTime">
+      </div>
+
+      <div class="form-group">
+        <label for="CargoType">CargoType</label>
+        <select
+        [(ngModel)]="model.CargoType" name="CargoType"
+        #CargoType="ngModel"
+        class="form-control"  id="CargoType" required name="CargoType">
+          <option value="">Please select a option</option>
+          <option [ngValue] = 'cargo.Ref' *ngFor="let cargo of cargos | async ">{{cargo.Description}}</option>
+         </select>
+      </div>
+
+      <div class="form-group">
+        <label for="VolumeGeneral">VolumeGeneral</label>
+        <input
+        [(ngModel)]="model.VolumeGeneral" name="VolumeGeneral"
+        #VolumeGeneral="ngModel"
+        type="text" class="form-control" id="VolumeGeneral">
+      </div>
+
+      <div class="form-group">
+        <label for="Weight">Weight</label>
+        <input
+        [(ngModel)]="model.Weight" name="Weight"
+        #Weight="ngModel"
+        type="text" class="form-control" id="Weight">
+      </div>
+
+      <div class="form-group">
+        <label for="ServiceType">ServiceType</label>
+        <select
+        [(ngModel)]="model.ServiceType" name="ServiceType"
+        #ServiceType="ngModel"
+        class="form-control"  id="ServiceType" required name="ServiceType">
+          <option value="">Please select a option</option>
+          <option  [ngValue] = 'service.Ref'  *ngFor="let service of services | async ">{{service.Description}}</option>
+         </select>
+      </div>
+
+      <div class="form-group">
+        <label for="SeatsAmount">SeatsAmount</label>
+        <input
+        [(ngModel)]="model.SeatsAmount" name="SeatsAmount"
+        #SeatsAmount="ngModel"
+        type="text" class="form-control" id="SeatsAmount">
+      </div>
+
+      <div class="form-group">
+        <label for="Description">Description</label>
+        <input
+        [(ngModel)]="model.Description" name="Description"
+        #Description="ngModel"
+        type="text" class="form-control" id="Description">
+      </div>
+
+      <div class="form-group">
+        <label for="Cost">Cost</label>
+        <input [(ngModel)]="model.Cost" name="Cost"
+        #Cost="ngModel"
+        type="text" class="form-control" id="Cost">
+      </div>
+
+
+
+      <div class="form-group">
+        <label for="Sender">Sender</label>
+        <select (change) ="contragentsSend = this.getContragent($event.target.value)"
+        [(ngModel)]="model.Sender" name="Sender"
+        #Sender="ngModel"
+        class="form-control"  id="Sender" required name="Sender"
+        >
+          <option value="">Please select a option</option>
+          <option  *ngFor="let sender of senders | async "
+          [ngValue] = "sender.Ref"
+          >{{sender.Description}}</option>
+         </select>
+      </div>
+
+      <div class="form-group">
+        <div id="search-city">
+            <h4>CitySender search</h4>
+            <input #searchBoxCity id="search-city" (keyup)="search(searchBoxCity.value)" />
+            <div *ngFor="let city of cities | async" class="search-resultCity"
+            (click)="writeCity([city.MainDescription,city.Area,city.DeliveryCity],'sender')">
+               <span><strong>{{city.MainDescription}}</strong> <span> Область: {{city.Area}}</span></span>
+            </div>
+            <label for="CitySender">CitySender</label>
+            <input
+            [(ngModel)]="model.CitySender" name="CitySender"
+            #CitySender="ngModel"
+            type="text" class="form-control" id="CitySender">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div id="search-addressSenderContainer">
+            <h4>Sender Address</h4>
+            <input #searchBoxAddress id="search-addressSender"
+            (keyup)="searchAddress(searchBoxAddress.value)" />
+            <div *ngFor="let address of addresses | async"
+            class="search-resultAddress"
+            (click)="writeAddressSender([address.Description,address.Ref],'sender')">
+               <span><strong>{{address.Description}}</strong></span>
+            </div>
+            <label for="senderAddress">SenderStreet</label>
+            <input
+            [(ngModel)]="model.SenderAddress" name="SenderAddress"
+            #SenderAddress="ngModel"
+            type="text" class="form-control" id="SenderAddress">
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label for="StreetNum">StreetNum</label>
+        <input
+        [(ngModel)]="model.StreetNum" name="StreetNum"
+        #StreetNum="ngModel"
+        type="text" class="form-control" id="StreetNum">
+      </div>
+
+
+      <div class="form-group">
+        <label for="ContactSender">ContactSender</label>
+        <select
+         [(ngModel)]="Contragent" required name="Contragent"
+        (ngModelChange)="onChangeSender($event)"
+        class="form-control"  id="Contragent" required name="Contragent"
+        >
+          <option [ngValue]="{Description: contragent.Ref, Phones: contragent.Phones}" *ngFor="let contragent of contragentsSend | async"
+          >
+          {{contragent.Description}}
+          </option>
+         </select>
+      </div>
+
+      <div class="form-group">
+        <label for="SendersPhone">SendersPhone</label>
+        <input
+        [(ngModel)]="model.SendersPhone" name="SenderPhone"
+        #SendersPhone="ngModel"
+        type="text" class="form-control" id="SendersPhone"
+        >
+      </div>
+
+
+
+      <div class="form-group">
+        <label for="Recipient">Recipient</label>
+        <select
+        (change) ="contragentsRes = this.getContragent($event.target.value)"
+        [(ngModel)]="model.Recipient" name="Recipient"
+        #Recipient="ngModel"
+        class="form-control"  id="Recipient" required name="Recipient">
+          <option value="">Please select a option</option>
+          <option  *ngFor="let recipient of recipients | async"
+          [ngValue] = "recipient.Ref"
+          >
+          {{recipient.Description}}
+          </option>
+        </select>
+      </div>
+
+  <div class="form-group">
+    <div id="search-cityRecipient">
+        <h4>CityRecipient search</h4>
+        <input #searchBoxCityRecipient id="search-cityRecipient"
+        (keyup)="searchCityRecipient(searchBoxCityRecipient.value)" />
+        <div *ngFor="let city of citiesRecipient | async"
+        class="search-resultCityRecipient"
+        (click)="writeCity([city.MainDescription,city.Area,city.DeliveryCity],'recipient')">
+           <span><strong>{{city.MainDescription}}</strong> <span> Область: {{city.Area}}</span></span>
+        </div>
+        <label for="CityRecipient">CityRecipient</label>
+        <input
+        [(ngModel)]="model.CityRecipient" name="CityRecipient"
+        #CityRecipient="ngModel"
+        type="text" class="form-control" id="CityRecipient">
+    </div>
+  </div>
+
+
+
+      <div class="form-group">
+        <div id="search-addressRecipientContainer">
+            <h4>Recipient Address</h4>
+            <input #searchBoxAddressRecipient id="search-addressRecipient"
+            (keyup)="searchAddressRecipient(searchBoxAddressRecipient.value)" />
+            <div *ngFor="let address of addressesRecipient | async"
+            class="search-resultAddressRecipient"
+            (click)="writeAddressSender([address.Description,address.Ref],'recipient')">
+               <span><strong>{{address.Description}}</strong></span>
+            </div>
+            <label for="RecipientAddress">RecipientStreet</label>
+            <input
+            [(ngModel)]="model.RecipientAddress" name="RecipientAddress"
+            #AddressRecipient="ngModel"
+            type="text" class="form-control" id="RecipientAddress">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="StreetNumRecipient">StreetNum</label>
+        <input
+        [(ngModel)]="model.StreetNumRecipient" name="StreetNumRecipient"
+        #StreetNumRecipient="ngModel"
+        type="text" class="form-control" id="StreetNumRecipient">
+      </div>
+
+      <div class="form-group">
+        <label for="ContactRecipient">ContactRecipient</label>
+        <select
+        [(ngModel)]="ContactRecipient" required name="ContactRecipient"
+        (ngModelChange)="onChangeRecipient($event)"
+        class="form-control"  id="ContactRecipient" required name="ContactRecipient"
+        >
+        <option [ngValue]="{Description: contragent.Ref, Phones: contragent.Phones}"
+        *ngFor="let contragent of contragentsRes | async"
+        >
+        {{contragent.Description}}
+        </option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="RecipientsPhone">RecipientsPhone</label>
+        <input
+        [(ngModel)]="model.RecipientsPhone" name="RecipientsPhone"
+        #RecipientsPhone="ngModel"
+        type="text" class="form-control" id="RecipientsPhone">
+      </div>
+
+
+      <button type="submit"  class="btn btn-success">Send</button>
+
+    </form>
+
+    <pre>{{formDir.form.value | json}}</pre>
+</div>

@@ -1,0 +1,37 @@
+<span>Идентификатор ЭН: </span>{{en.Ref}}
+<span>Фактическая дата отправки: </span>{{en.DateTime}}
+<span>Желаемая дата доставки: </span>{{en.PreferredDeliveryDate}}
+<span>Фактический вес: </span>{{en.Weight}}
+<span>Количество мест: </span>{{en.SeatsAmount}}
+<span>Номер интернет документа: </span>{{en.IntDocNumber}}
+<span>Оценочная стоимость: </span>{{en.Cost}}
+<span>Идентификатор города отправителя: </span>{{en.CitySender}}
+<span>Идентификатор города получателя: </span>{{en.CityRecipient}}
+<span>Идентификатор адреса отправителя: </span>{{en.SenderAddress}}
+<span>Идентификатор адреса получателя: </span>{{en.RecipientAddress}}
+<span>стоимость за доставку: </span>{{en.CostOnSite}}
+<span>Плательщик доставки: </span>{{en.PayerType}}
+<span>Тип оплаты: </span>{{en.PaymentMethod}}
+<span>Обратная доставка: </span>{{en.AfterpaymentOnGoodsCost}}
+<span>Номер упаковки: </span>{{en.PackingNumber}}
+
+
+
+<div *ngIf="selectedEI">
+  <span>Фактическая дата отправки: </span>{{selectedEI.DateTime}}
+  <span>Желаемая дата доставки: </span>{{selectedEI.PreferredDeliveryDate}}
+  <span>Фактический вес: </span>{{selectedEI.Weight}}
+  <span>Количество мест: </span>{{selectedEI.SeatsAmount}}
+  <span>Номер интернет документа: </span>{{selectedEI.IntDocNumber}}
+  <span>Оценочная стоимость: </span>{{selectedEI.Cost}}
+  <span>Идентификатор города отправителя: </span>{{selectedEI.CitySender}}
+  <span>Идентификатор города получателя: </span>{{selectedEI.CityRecipient}}
+  <span>Идентификатор адреса отправителя: </span>{{selectedEI.SenderAddress}}
+  <span>Идентификатор адреса получателя: </span>{{selectedEI.RecipientAddress}}
+  <span>стоимость за доставку: </span>{{selectedEI.CostOnSite}}
+  <span>Плательщик доставки: </span>{{selectedEI.PayerType}}
+  <span>Тип оплаты: </span>{{selectedEI.PaymentMethod}}
+  <span>Обратная доставка: </span>{{selectedEI.AfterpaymentOnGoodsCost}}
+  <span>Номер упаковки: </span>{{selectedEI.PackingNumber}}
+</div>
+`
